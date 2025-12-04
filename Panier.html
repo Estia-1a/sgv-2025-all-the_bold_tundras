@@ -1,40 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-    <title>Panier</title>
-    <meta name="description" content="boop">
-    </head>
-    <h1>Votre panier</h1>
+<head>
+<meta charset="UTF-8">
+<title>Panier - Location de médias</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background: #f4f4f4;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .panier {
+        max-width: 750px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .article {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #ddd;
+        gap: 15px;
+    }
+
+    .article:last-child {
+        border-bottom: none;
+    }
+
+    .poster {
+        width: 70px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .prix {
+        font-weight: bold;
+        margin-left: 20px;
+    }
+
+    .resume {
+        margin-top: 25px;
+        padding-top: 15px;
+        border-top: 2px solid #000;
+    }
+
+    .resume div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .total {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<h1>Votre panier</h1>
 
 <div class="panier">
 
     <!-- Article 1 -->
     <div class="article">
-        <label>
-            <input type="checkbox" class="item" data-price="4.99" checked>
-            Inception (Location 48h)
-        </label>
+        <img src="Inception.webp" class="poster" alt="Inception">
+        <div class="info">
+            <label>
+                <input type="checkbox" class="item" data-price="4.99" checked>
+                Inception (Location 48h)
+            </label>
+        </div>
         <div class="prix">4.99 €</div>
     </div>
+
     <!-- Article 2 -->
     <div class="article">
-        <label>
-            <input type="checkbox" class="item" data-price="3.50" checked>
-            Le Seigneur des Anneaux
-        </label>
+        <img src="Seigneur des anneaux.webp" class="poster" alt="Le Seigneur des Anneaux">
+        <div class="info">
+            <label>
+                <input type="checkbox" class="item" data-price="3.50" checked>
+                Le Seigneur des Anneaux
+            </label>
+        </div>
         <div class="prix">3.50 €</div>
     </div>
+
     <!-- Article 3 -->
     <div class="article">
-        <label>
-            <input type="checkbox" class="item" data-price="2.99">
-            Interstellar
-        </label>
+        <img src="Interstellar2.webp" class="poster" alt="Interstellar">
+        <div class="info">
+            <label>
+                <input type="checkbox" class="item" data-price="2.99">
+                Interstellar
+            </label>
+        </div>
         <div class="prix">2.99 €</div>
     </div>
+
     <!-- Résumé -->
     <div class="resume">
         <div>
@@ -50,7 +128,10 @@
             <span id="total">0.00 €</span>
         </div>
     </div>
-    <script>
+
+</div>
+
+<script>
 function updateTotals() {
     const items = document.querySelectorAll(".item");
     let subtotal = 0;
@@ -61,7 +142,7 @@ function updateTotals() {
         }
     });
 
-    const fees = 1.00; // frais fixes (modifiable)
+    const fees = 1.00; // frais fixes
     const total = subtotal + fees;
 
     document.getElementById("subtotal").textContent = subtotal.toFixed(2) + " €";
