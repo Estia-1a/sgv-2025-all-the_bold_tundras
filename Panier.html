@@ -50,6 +50,32 @@
             <span id="total">0.00 €</span>
         </div>
     </div>
+    <script>
+function updateTotals() {
+    const items = document.querySelectorAll(".item");
+    let subtotal = 0;
 
-</div>
+    items.forEach(item => {
+        if (item.checked) {
+            subtotal += parseFloat(item.dataset.price);
+        }
+    });
+
+    const fees = 1.00; // frais fixes (modifiable)
+    const total = subtotal + fees;
+
+    document.getElementById("subtotal").textContent = subtotal.toFixed(2) + " €";
+    document.getElementById("total").textContent = total.toFixed(2) + " €";
+}
+
+// Calcul initial
+updateTotals();
+
+// Recalcul dès qu'un item est coché/décoché
+document.querySelectorAll(".item").forEach(item => {
+    item.addEventListener("change", updateTotals);
+});
+</script>
+
+</body>
 </html>
