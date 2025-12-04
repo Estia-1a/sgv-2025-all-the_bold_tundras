@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Panier</title>
+    <style>
+        :root{
+            --bg: #f4f6fb;
+            --primary: #4a8bdf;
+            --secondary: #ff921c;
+            --accent: #d8125b;
+            --text-dark: #222;
+            --text-light: #ffffff;
+            --card-bg: #ffffff;
+            --border-soft: #dde2f0;
+        }
+
+        *{ box-sizing: border-box; }
+
+        body{
+            margin:0;
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text-dark);
+        }
+
+        /* Barre type navigateur */
+        .browser-bar{
+            background: linear-gradient(90deg,#2c2e39,#4a8bdf);
+            color: var(--text-light);
+            padding:6px 10px;
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+        .browser-bar button{
+            width:24px;height:24px;
+            border-radius:50%;
+            border:none;
+            cursor:pointer;
+            background:#ff921c;
+            color:#222;
+            font-weight:bold;
+        }
+        .browser-bar button:nth-child(2){ background:#ffd15c; }
+        .browser-bar button:nth-child(3){ background:#ff6b6b; }
+        .browser-title{
+            font-size:14px;
+            font-weight:bold;
+            margin-right:8px;
+        }
+        .address-bar{
+            flex:1;
+            padding:4px 6px;
+            border-radius:4px;
+            border:1px solid #999;
+        }
+        .search-icon{
+            width:28px;height:28px;
+            border-radius:50%;
+            background:#fff;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#4a8bdf;
+            font-size:15px;
+        }
+
+        /* Layout principal */
+        .page-wrapper{
+            display:grid;
+            grid-template-columns: 1fr 16px;
+            min-height: calc(100vh - 40px);
+        }
+        .scrollbar{
+            background:#e0e3f0;
+            position:relative;
+        }
+        .scroll-thumb{
+            position:absolute;
+            top:40px;
+            left:3px;
+            width:10px;height:70px;
+            border-radius:6px;
+            background:#4a8bdf;
+        }
+
+        .page{
+            padding:18px 22px 10px;
+        }
+
+        .top-line{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        .top-line a{
+            text-decoration:none;
+            color:var(--primary);
+            font-weight:bold;
+        }
+        .cart-button{
+            padding:8px 18px;
+            border-radius:20px;
+            border:none;
+            background:var(--accent);
+            color:var(--text-light);
+            font-weight:bold;
+            cursor:pointer;
+            box-shadow:0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .content{
+            margin-top:20px;
+            display:grid;
+            grid-template-columns: 2fr 1.2fr;
+            gap:20px;
+        }
+
+        /* Colonne produits */
+        .products-column{
+            display:flex;
+            flex-direction:column;
+            gap:16px;
+        }
+        .product-row{
+            display:grid;
+            grid-template-columns: 130px 1.5fr 70px;
+            gap:12px;
+            align-items:center;
+        }
+        .product-image{
+            height:120px;
+            border-radius:10px;
+            background:linear-gradient(135deg,#4a8bdf,#a0006d);
+            color:#fff;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:12px;
+        }
+        .product-synopsis{
+            background:var(--card-bg);
+            border-radius:10px;
+            padding:10px;
+            border:1px solid var(--border-soft);
+            box-shadow:0 2px 4px rgba(0,0,0,0.06);
+        }
+        .product-synopsis h3{
+            margin:0 0 4px;
+            color:var(--primary);
+        }
+        .product-synopsis p{
+            margin:0;
+            font-size:13px;
+        }
+        .product-actions{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:8px;
+        }
+        .trash{
+            font-size:20px;
+            cursor:pointer;
+            color:#ff6b6b;
+        }
+        .qty-input{
+            width:54px;
+            padding:4px;
+            border-radius:6px;
+            border:1px solid var(--border-soft);
+        }
+
+        .summary-box{
+            margin-top:10px;
+            background:var(--card-bg);
+            border-radius:10px;
+            padding:12px 14px;
+            border:1px solid var(--border-soft);
+            box-shadow:0 2px 4px rgba(0,0,0,0.06);
+            width:280px;
+            font-size:14px;
+        }
+        .summary-box h4{
+            margin-top:0;
+            color:var(--primary);
+        }
+        .summary-total{
+            margin-top:6px;
+            padding-top:6px;
+            border-top:1px dashed #ccd2e5;
+            font-weight:bold;
+        }
+
+        /* Colonne droite */
+        .right-column{
+            display:flex;
+            flex-direction:column;
+            gap:18px;
+        }
+        .similar-card{
+            background:var(--card-bg);
+            border-radius:10px;
+            padding:12px 14px 16px;
+            border:1px solid var(--border-soft);
+            box-shadow:0 2px 4px rgba(0,0,0,0.06);
+        }
+        .similar-title{
+            text-align:center;
+            color:var(--accent);
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+        .similar-slider{
+            height:140px;
+            border-radius:10px;
+            background:linear-gradient(90deg,#ff921c,#ffd15c);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:#222;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+        .slider-control{
+            width:100%;
+        }
+
+        /* Bas de page */
+        .footer-bar{
+            margin-top:18px;
+            background:#2c2e39;
+            height:30px;
+            display:flex;
+            justify-content:flex-end;
+            align-items:center;
+            padding:0 10px;
+        }
+        .help-icon{
+            width:20px;height:20px;
+            border-radius:50%;
+            border:2px solid #ffd15c;
+            color:#ffd15c;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- barre navigateur -->
+    <div class="browser-bar">
+        <span class="browser-title">A Web Page</span>
+        <button title="Précédent">&lt;</button>
+        <button title="Suivant">&gt;</button>
+        <button title="Fermer">×</button>
+        <button title="Accueil">🏠</button>
+        <input class="address-bar" type="text" value="https://">
+        <div class="search-icon" title="Rechercher">🔍</div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="page">
+            <div class="top-line">
+                <a href="#">&lt; Page d'accueil</a>
+                <button class="cart-button">Mon panier</button>
+            </div>
+
+            <div class="content">
+                <!-- colonne produits -->
+                <div class="products-column">
+
+                    <div class="product-row">
+                        <div class="product-image">Produit 1</div>
+                        <img src="PHOTO.FILM1.jpg" alt="PHOTOFILM">
+                        <div class="product-synopsis">
+                            <h3>Synopsis</h3>
+                            <p>Courte description de votre premier produit dans le panier.</p>
+                        </div>
+                        <div class="product-actions">
+                            <span class="trash" title="Supprimer">&#128465;</span>
+                            <input class="qty-input" type="number" value="1" min="1">
+                        </div>
+                    </div>
+                    <div class="product-row">
+                        <div class="product-image">Produit 2</div>
+                        <img src="PHOTO.FILM2.jpg" alt="PHOTOFILM">
+                        <div class="product-synopsis">
+                            <h3>Synopsis</h3>
+                            <p>Courte description de votre deuxième produit dans le panier.</p>
+                        </div>
+                        <div class="product-actions">
+                            <span class="trash" title="Supprimer">&#128465;</span>
+                            <input class="qty-input" type="number" value="1" min="1">
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <h4>Récapitulatif</h4>
+                        <p><strong>Produit 1</strong><br>Prix : 12,00 € • Qté : 1</p>
+                        <p><strong>Produit 2</strong><br>Prix : 18,00 € • Qté : 1</p>
+                        <div class="summary-total">
+                            Sous‑total : 30,00 €<br>
+                            TOTAL : 30,00 €
+                        </div>
+                    </div>
+                </div>
+
+                <!-- colonne droite -->
+                <div class="right-column">
+                    <div class="similar-card">
+                        <div class="similar-title">Similaire à vos achats</div>
+                        <div class="similar-slider">
+                            Carrousel de produits
+                        </div>
+                        <input class="slider-control" type="range" min="0" max="100" value="40">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bar">
+                <div class="help-icon">?</div>
+            </div>
+        </div>
+
+        <div class="scrollbar">
+            <div class="scroll-thumb"></div>
+        </div>
+    </div>
+
+</body>
+</html>

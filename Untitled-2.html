@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Page panier</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    html,body{height:100%}
+    body{
+      background:linear-gradient(135deg,#0f172a,#ffffff,#ec4899);
+      background-attachment:fixed;
+      color:#f9fafb;
+    }
+
+    header{
+      width:100%;
+      padding:16px 40px;
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      background:rgba(15,23,42,0.9);
+      box-shadow:0 2px 4px rgba(15,23,42,.4);
+      position:sticky;top:0;z-index:10;
+      
+      
+    }
+    .btn-panier{
+      padding:10px 22px;border-radius:999px;border:none;
+      background:#f50764;color:#fff;font-size:14px;font-weight:600;cursor:pointer;
+    }
+
+    main{
+      padding:24px 40px 40px;
+      display:grid;
+      grid-template-columns:2.1fr 1.9fr;
+      gap:32px;
+    }
+    .back-link{
+      grid-column:1/-1;margin-bottom:20px;
+      color:#bfdbfe;font-size:14px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    }
+    .back-link::before{content:"◀";font-size:13px}
+
+    .col-gauche{display:flex;flex-direction:column;gap:24px}
+
+    /* produit : image + synopsis (avec quantite + poubelle à droite) */
+    .produit{
+      display:grid;
+      grid-template-columns:120px 1fr;
+      align-items:center;
+      gap:18px;
+    }
+    .vignette-produit{
+      width:120px;height:120px;border-radius:16px;
+      background:linear-gradient(130deg,#0f766e,#a855f7);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;position:relative;
+    }
+    .vignette-produit img{width:100%;height:100%;object-fit:cover;border-radius:16px}
+    .vignette-label{
+      position:absolute;left:10px;bottom:10px;padding:4px 8px;
+      border-radius:999px;font-size:12px;
+      background:rgba(15,23,42,.8);color:#f9fafb;
+    }
+
+    .bloc-synopsis{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:center;
+    }
+    .synopsis-bulle{
+      padding:10px 14px;background:#ffffff;
+      border-radius:16px;box-shadow:0 2px 8px rgba(15,23,42,.35);
+      font-size:13px;color:#111827;
+    }
+    .synopsis-titre{color:#130202;font-weight:700;margin-bottom:4px}
+
+    .actions-produit{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:8px;
+    }
+    .btn-delete{
+      background:none;border:none;color:#f97373;cursor:pointer;font-size:18px;
+    }
+    .quantite{
+      width:56px;height:28px;border-radius:6px;
+      border:1px solid #cbd5e1;text-align:center;font-size:14px;color:#111827;
+    }
+
+    .recap{
+      padding:18px 20px;
+      background:rgba(15,23,42,0.9);
+      border-radius:16px;
+      box-shadow:0 2px 8px rgba(15,23,42,.6);
+      font-size:14px;line-height:1.5;
+    }
+    .recap h3{margin-bottom:8px;color:#bfdbfe;font-size:15px}
+    .recap hr{margin:8px 0;border:none;border-top:1px dashed #4b5563}
+    .recap-strong{font-weight:700}
+
+    .col-droite{
+      display:flex;flex-direction:column;gap:28px;align-items:flex-end;
+    }
+    .synopsis-droite{
+      width:100px;padding:10px 14px;background:#ffffff;
+      border-radius:16px;box-shadow:0 2px 8px rgba(15,23,42,.35);
+      font-size:13px;color:#111827;
+    }
+
+.carrousel-wrapper{
+  width:100%;
+  min-height:260px;      /* avant : 210px */
+  background:#ffffff;
+  border-radius:18px;
+  box-shadow:0 3px 10px rgba(15,23,42,.6);
+  padding:18px 22px;     /* padding un peu réduit */
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+  
+    .carrousel-header{
+      display:flex;justify-content:center;font-size:16px;
+      font-weight:600;color:#ec0e6b;
+    }
+
+.carrousel{
+  height:350px;           /* hauteur fixe plus petite */
+  border-radius:16px;
+  background:linear-gradient(90deg,#ffbf3c,#ff7e2f);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#111827;
+  font-weight:600;
+}
+
+    }
+    .slider{width:100%;margin-top:6px; auto}
+
+    @media(max-width:900px){
+      main{grid-template-columns:1fr}
+      .col-droite{align-items:stretch}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <button class="btn-panier">Mon panier</button>
+</header>
+
+<main>
+  <a href="#" class="back-link">Page d'accueil</a>
+
+  <!-- Colonne gauche -->
+  <section class="col-gauche">
+    <!-- Produit 1 -->
+    <article class="produit">
+      <div class="vignette-produit">
+        <img src="PHOTO.FILM1.jpg" alt="Produit 1">
+        <span class="vignette-label">Produit 1</span>
+      </div>
+
+      <div class="bloc-synopsis">
+        <div class="synopsis-bulle">
+          <div class="synopsis-titre">Synopsis</div>
+          <p> Pat Calhoun, dit « Ghetto Pat », et Perfidia Beverly Hills sont membres d'un groupe révolutionnaire d'extrême-gauche, les French 75. Libérant des migrants d'un centre de détention en Californie, Perfidia en profite pour humilier le commandant de la base, le capitaine Steven J.</p>
+        </div>
+        <div class="actions-produit">
+          <button class="btn-delete">🗑</button>
+          <input type="number" class="quantite" value="1" min="1">
+        </div>
+      </div>
+    </article>
+
+    <!-- Produit 2 -->
+    <article class="produit">
+      <div class="vignette-produit">
+        <img src="PHOTO.FILM2.jpg" alt="Produit 2">
+        <span class="vignette-label">Produit 2</span>
+      </div>
+
+      <div class="bloc-synopsis">
+        <div class="synopsis-bulle">
+          <div class="synopsis-titre">Synopsis</div>
+          <p>Alors que la Terre se meurt, une équipe d'astronautes franchit un trou de ver apparu près de Saturne et conduisant à une autre galaxie, afin d'explorer un nouveau système stellaire dans l'espoir de trouver une planète habitable et d'y établir une colonie spatiale pour sauver l'humanité.</p>
+        </div>
+        <div class="actions-produit">
+          <button class="btn-delete">🗑</button>
+          <input type="number" class="quantite" value="1" min="1">
+        </div>
+      </div>
+    </article>
+
+    <!-- Récap -->
+    <section class="recap">
+      <h3>Récapitulatif</h3>
+      <p><span class="recap-strong">Produit 1</span><br>Prix : 12,00 € – Qté : 1</p>
+      <p><span class="recap-strong">Produit 2</span><br>Prix : 18,00 € – Qté : 1</p>
+      <hr>
+      <p>Sous-total : 30,00 €<br><span class="recap-strong">TOTAL : 30,00 €</span></p>
+    </section>
+  </section>
+
+  <!-- Colonne droite -->
+    <div class="carrousel-wrapper">
+      <div class="carrousel-header">Similaire à vos achats</div>
+
+      <img src="carousel.jpg"
+      <div class="carrousel">Carrousel de produits</div>
+       style="width:100%;height:100%;object-fit:cover;">
+  </div>
+
+  <!-- slider dans le même cadre blanc, sous les images -->
+  <input type="range" class="slider" min="0" max="100" value="50">
+</div>
+  </section>
+</main>
+<button class="help-button" title="Aide">
+  🔍
+</button>
+
+</body>
+</html>
