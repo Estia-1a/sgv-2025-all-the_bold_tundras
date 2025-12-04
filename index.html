@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <link rel="stylesheet" href="styles/desktop.css" media="screen and (min-width: 768px)">
+    <link rel="stylesheet" href="styles/mobile.css" media="screen and (max-width: 767px)">
+    <link rel="stylesheet" href="style.css">
+    <title>Page Web projet</title>
+</head>
+<body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const lien = document.getElementById("toggle-avis");
+            const bloc = document.getElementById("avis-supplementaires");
+        
+            lien.addEventListener("click", function (e) {
+                e.preventDefault();
+        
+                if (bloc.style.display === "none") {
+                    bloc.style.display = "block";
+                    lien.textContent = "Voir moins d'avis";
+                } else {
+                    bloc.style.display = "none";
+                    lien.textContent = "Voir plus d'avis";
+                }
+            });
+        });
+        </script>
+
+</body>
+</html>
+
+<div class="header-icons">
+    <img src="maison.webp" alt="Accueil" width="40">
+    <img src="panier.webp" alt="Panier" width="40">
+</div>  
+
+<div class="page-film">
+
+        <div class="film-left">
+            <p>CATÉGORIE FILM</p>
+            <img src="affiche du film.webp" alt="affiche du film">
+        </div>
+
+    <div class="film-center">
+
+            <h1>Avatar: La voie de l'eau</h1>
+            <p>
+                Jake Sully et Neytiri sont devenus parents. L'intrigue se déroule une dizaine d'années après les événements racontés dans le long-métrage originel. Leur vie idyllique, proche de la nature, est menacée lorsque la Resources Development Administration, dangereuse organisation non-gouvernementale, est de retour sur Pandora. Contraints de quitter leur habitat naturel, Jake et sa famille se rendent sur les récifs, où ils pensent trouver asile. Mais ils tombent sur un clan, les Metkayina, aux mœurs différentes des leurs....   
+            </p>
+            <p>Réalisé par : James Cameron</p>
+            <p>Date de sortie : 10/2022</p>
+
+       <h2>Avis</h2>
+        <p>user.name@html1 &#9733;&#9733;&#9733;&#9733;&#9734;</p>
+        <p>Avatar: La Voie de l'eau est un film aux images superbes et touchantes, idéal pour un public familial, mais peut sembler trop contemplatif pour ceux qui préfèrent l'action intense.</p>
+
+        <p>
+            <a href="#" id="toggle-avis">Voir plus d'avis</a>
+        </p>
+        
+        <div id="avis-supplementaires" style="display: none;">
+            <p>user.name@html2 &#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>Vraiment un super film!</p>
+
+            <p>user.name@html3 &#9733;&#9733;&#9733;&#9734;&#9734;</p>
+            <p>Très beau film!</p>
+
+            <p>user.name@html4 &#9733;&#9733;&#9734;&#9734;&#9734;</p>
+            <p>Un peu long mais bon film</p>
+        </div>
+
+        <button>Louer</button>
+        <button>Commander</button>   
+
+    </div>
+
+    <div class="film-left">
+
+    <h2>Vous pourriez aimer</h2>
+
+    <div class="suggestion-item">
+        <img src="Interstellar.webp" alt="Interstellar" height="70">
+        <div class="suggestion-info">
+            <h3>Interstellar</h3>
+            <a href="#">Voir le résumé</a>
+        </div>
+    </div>
+
+    <div class="suggestion-item">
+        <img src="dune.webp" alt="Dune" height="70">
+        <div class="suggestion-info">
+            <h3>Dune</h3>
+            <a href="#">Voir le résumé</a>
+        </div>
+    </div>
+
+    <div class="suggestion-item">
+        <img src="Inception.webp" alt="Inception" height="70">
+        <div class="suggestion-info">
+            <h3>Inception</h3>
+            <a href="#">Voir le résumé</a>
+        </div>
+    </div>
+</div>
+>>>>>>> origin/main
