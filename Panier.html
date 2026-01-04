@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Panier - Location de médias</title>
+<style>
+    
+</style>
+</head>
+<body>
+ <div class="header-icons">
+    <a href="index.html">
+        <img src="maison.webp" alt="Accueil" width="40">
+    </a>
+
+    <a href="Panier.html">
+        <img src="panier.webp" alt="Panier" width="40">
+    </a>
+</div>
+<h1>Votre panier</h1>
+
+<div class="panier">
+
+    <!-- Article 1 -->
+    <div class="article">
+        <img src="Inception.webp" class="poster" alt="Inception">
+        <div class="info">
+            <label>
+                <input type="checkbox" class="item" data-price="4.99" checked>
+                Inception
+            </label>
+        </div>
+        <div class="prix">4.99 €</div>
+    </div>
+
+    <!-- Article 2 -->
+    <div class="article">
+        <img src="Seigneur-des-anneaux.webp" class="poster" alt="Le Seigneur des Anneaux">
+        <div class="info">
+            <label>
+                <input type="checkbox" class="item" data-price="3.50" checked>
+                Le Seigneur des Anneaux
+            </label>
+        </div>
+        <div class="prix">3.50 €</div>
+    </div>
+
+    <!-- Article 3 -->
+    <div class="article">
+        <img src="Interstellar2.webp" class="poster" alt="Interstellar">
+        <div class="info">
+            <label>
+                <input type="checkbox" class="item" data-price="2.99">
+                Interstellar
+            </label>
+        </div>
+        <div class="prix">2.99 €</div>
+    </div>
+
+    <!-- Résumé -->
+    <div class="resume">
+        <div>
+            <span>Sous-total :</span>
+            <span id="subtotal">0.00 €</span>
+        </div>
+        <div>
+            <span>Frais fixes :</span>
+            <span>1.00 €</span>
+        </div>
+        <div class="total">
+            <span>Total :</span>
+            <span id="total">0.00 €</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function updateTotals() {
+    const items = document.querySelectorAll(".item");
+    let subtotal = 0;
+
+    items.forEach(item => {
+        if (item.checked) {
+            subtotal += parseFloat(item.dataset.price);
+        }
+    });
+
+    const fees = 1.00; // frais fixes
+    const total = subtotal + fees;
+
+    document.getElementById("subtotal").textContent = subtotal.toFixed(2) + " €";
+    document.getElementById("total").textContent = total.toFixed(2) + " €";
+}
+
+// Calcul initial
+updateTotals();
+
+// Recalcul dès qu'un item est coché/décoché
+document.querySelectorAll(".item").forEach(item => {
+    item.addEventListener("change", updateTotals);
+});
+</script>
+
+</body>
+</html>
